@@ -33,6 +33,7 @@
                 <code-mirror
                   :value="requestBody"
                   :options="{}"
+                  @fullscreen="onFullScreen"
                   @onChange="onRequestBodyChange"/>
                 <header-table :headers="requestHeaders"/>
                 <basic-auth @change="onChangeBasicAuth"/>
