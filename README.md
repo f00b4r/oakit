@@ -46,7 +46,10 @@ new Vue({
 </template>
 
 <script>
+import OpenApiClient from "openapi-toolkit";
+
 export default {
+	components: {OpenApiClient},
 	props: [
 		"schema",
 	]
