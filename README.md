@@ -23,7 +23,7 @@
 
 ```javascript
 import Vue from "vue";
-import OpenApiClient from "openapi-toolkit";
+import OpenApiClient from "@apitte/openapi-toolkit";
 import SWAGGER from "./swagger.json";
 
 new Vue({
@@ -46,7 +46,7 @@ new Vue({
 </template>
 
 <script>
-import OpenApiClient from "openapi-toolkit";
+import OpenApiClient from "@apitte/openapi-toolkit";
 import SWAGGER from "./swagger.json";
 
 export default {

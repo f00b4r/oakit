@@ -1,5 +1,5 @@
 {
-	"name": "openapi-toolkit",
+	"name": "@apitte/openapi-toolkit",
 	"version": "0.0.1",
 	"author": "Jura Papp",
 	"license": "MIT",
