@@ -24,13 +24,13 @@
 ```javascript
 import Vue from "vue";
 import OpenApiClient from "openapi-toolkit";
-import {TEST_SWAGGER} from "<path to your schema>";
+import SWAGGER from "./swagger.json";
 
 new Vue({
 	el: "#app",
 	render: h => h(OpenApiClient, {
 		props: {
-			schema: TEST_SWAGGER
+			schema: SWAGGER
 		}
 	})
 });
@@ -41,21 +41,23 @@ new Vue({
 ```vue
 <template>
   <div>
-  	<open-api-client :schema="schema" />
+    <open-api-client :schema="schema"/>
   </div>
 </template>
 
 <script>
 import OpenApiClient from "openapi-toolkit";
+import SWAGGER from "./swagger.json";
 
 export default {
 	components: {OpenApiClient},
-	props: [
-		"schema",
-	]
+	data() {
+		return {
+			schema: TEST_SWAGGER
+    };
+	}
 };
 </script>
-
 ```
 
 
