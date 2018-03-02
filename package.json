@@ -26,6 +26,7 @@
 		"webpack-dev-server": "^2.10.1",
 		"webpack-visualizer-plugin": "^0.1.11"
 	},
+	"main": "src/index.js",
 	"scripts": {
 		"eslint": "eslint --ext .js,.vue src/",
 		"eslint-fix": "eslint --ext .js,.vue src/ --fix",
