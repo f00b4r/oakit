@@ -1,7 +1,5 @@
 /* eslint-env node */
-const webpack = require("webpack");
 const path = require("path");
-const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
 const Visualizer = require("webpack-visualizer-plugin");
 
 module.exports = {
@@ -31,20 +29,13 @@ module.exports = {
 				use: ["style-loader", "css-loader"]
 			},
 			{
-
 				test: /\.vue$/,
-				loader: "vue-loader",
+				use: ["vue-loader"],
 				exclude: /node_modules/
 			}
 		]
 	},
 	plugins: [
-		// new webpack.optimize.CommonsChunkPlugin({
-		// 	name: "vendor",
-		// 	minChunks: function (module) {
-		// 		return module.context && module.context.indexOf("node_modules") !== -1;
-		// 	}
-		// }),
 		new Visualizer()
 	],
 	devServer: {
@@ -59,32 +50,6 @@ module.exports = {
 	},
 	performance: {
 		hints: false
-	}
-	// devtool: '#eval-source-map'
+	},
+	mode: "production"
 };
-
-if (process.env.NODE_ENV === "production") {
-	module.exports.devtool = "#source-map";
-
-	module.exports.plugins = (module.exports.plugins || []).concat([
-		new webpack.DefinePlugin({
-			"process.env": {
-				NODE_ENV: "\"production\""
-			}
-		}),
-		new UglifyJSPlugin({
-			uglifyOptions: {
-				ie8: false,
-				ecma: 8,
-				output: {
-					comments: false,
-					beautify: false
-				},
-				warnings: false
-			}
-		}),
-		new webpack.LoaderOptionsPlugin({
-			minimize: true
-		})
-	]);
-}
