@@ -20,43 +20,31 @@ module.exports = {
 		extensions: [".js", ".jsx", ".vue"]
 	},
 	module: {
-		loaders: [
+		rules: [
 			{
 				test: /\.js$/,
-				loader: "babel-loader",
+				use: ["babel-loader"],
 				exclude: /node_modules/
 			},
 			{
 				test: /\.css$/,
-				use: [
-					{
-						loader: "style-loader"
-					},
-					{
-						loader: "css-loader"
-					}
-				]
+				use: ["style-loader", "css-loader"]
 			},
 			{
 
 				test: /\.vue$/,
 				loader: "vue-loader",
-				options: {
-					loaders: {
-						// Override the default loaders
-					}
-				},
 				exclude: /node_modules/
 			}
 		]
 	},
 	plugins: [
-		new webpack.optimize.CommonsChunkPlugin({
-			name: "vendor",
-			minChunks: function (module) {
-				return module.context && module.context.indexOf("node_modules") !== -1;
-			}
-		}),
+		// new webpack.optimize.CommonsChunkPlugin({
+		// 	name: "vendor",
+		// 	minChunks: function (module) {
+		// 		return module.context && module.context.indexOf("node_modules") !== -1;
+		// 	}
+		// }),
 		new Visualizer()
 	],
 	devServer: {
