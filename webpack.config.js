@@ -4,6 +4,8 @@ const Visualizer = require("webpack-visualizer-plugin");
 
 module.exports = {
 	entry: {
+		vendor: ["vue", "codemirror", "vue-codemirror"],
+		data: ["./src/data/pet.js", "./src/data/apiDoc.js"],
 		main: "./src/main.js"
 	},
 	output: {
