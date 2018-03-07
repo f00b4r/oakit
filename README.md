@@ -1,11 +1,14 @@
 # Open API Toolkit
 
+Alternative to swagger UI client written in Vue JS.
+
+<img src="https://raw.githubusercontent.com/apitte/openapi-toolkit/master/.docs/screenshot.png?raw=true">
+
 ## Version
 
 | State       | Version      | Branch   |
 |-------------|--------------|----------|
-| master      | `^0.0.1`     | `master` |
-
+| master      | `^0.0.2`     | `master` |
 
 ## Development
 
