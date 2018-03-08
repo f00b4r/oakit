@@ -6,6 +6,8 @@ Alternative to swagger UI client written in Vue JS.
 
 ## Version
 
+[![NPM](https://nodei.co/npm/@apitte/openapi-toolkit.png?compact=true)](https://www.npmjs.com/package/@apitte/openapi-toolkit)
+
 | State       | Version      | Branch   |
 |-------------|--------------|----------|
 | master      | `^0.0.2`     | `master` |
