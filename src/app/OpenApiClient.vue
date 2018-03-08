@@ -56,6 +56,12 @@
                 </div>
                 <header-table :headers="requestHeaders"/>
                 <basic-auth @change="onChangeBasicAuth"/>
+                <request-params
+                  :selected-server-url="selectedServerUrl"
+                  :schema="schema"
+                  :request-method="requestMethod"
+                  :selected-url="selectedUrl"
+                />
               </div>
               <div class="col-md-6">
                 <div :class="statusBackgroundColor">
@@ -91,11 +97,13 @@ import {getBasePath, getFirstServerUrl, getRequestBody, getServers} from "./help
 import HeaderTable from "./components/HeaderTable.vue";
 import BasicAuth from "./components/BasicAuth.vue";
 import SearchInput from "./components/SearchInput";
+import RequestParams from "./components/RequestParams";
 
 const AUTHORIZATION_HEADER = "Authorization";
 
 export default {
 	components: {
+		RequestParams,
 		SearchInput,
 		BasicAuth,
 		HeaderTable,
@@ -124,7 +132,11 @@ export default {
 			fullscreen: false,
 			search: "",
 			searchRegexp: false,
-			selectedServerUrl: ""
+			selectedServerUrl: "",
+			parameters: {
+				query: {},
+				path: {}
+			}
 		};
 	},
 	props: ["schema"],

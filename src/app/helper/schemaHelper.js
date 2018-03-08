@@ -44,15 +44,28 @@ function getRef(obj, ref, defaultObject) {
 	return get(obj, ref.substr(1).replaceAll("/", ","), defaultObject);
 }
 
-function hasParams(schema, url) {
-	return schema && schema.paths && schema.paths[url] && schema.paths[url].parameters && Array.isArray(schema.paths[url].parameters);
+function hasParams(schema, method, url) {
+	method = method.toLowerCase();
+	return schema && schema.paths
+		&& schema.paths[url]
+		&& schema.paths[url][method]
+		&& schema.paths[url][method].parameters
+		&& Array.isArray(schema.paths[url][method].parameters);
 }
 
-export function getRequestBody(schema, url) {
-	if (hasParams(schema, url)) {
-		const param = first(schema.paths[url].parameters.filter(p => p.in === "body"));
+export function getRequestBody(schema, method, url) {
+	if (hasParams(schema, method, url)) {
+		const param = first(schema.paths[url][method].parameters.filter(p => p.in === "body"));
 
 		return JSON.stringify(param);
 	}
 	return "";
+}
+
+export function getPathParams(schema, method, url) {
+	method = method.toLowerCase();
+	if (hasParams(schema, method, url)) {
+		return schema.paths[url][method].parameters.filter(p => p.in === "path");
+	}
+	return [];
 }
