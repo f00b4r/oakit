@@ -11,25 +11,10 @@
             {{ schema.info.title }}
             <div class="row">
               <div class="col">
-                <div class="input-group">
-                  <input
-                    tabindex="1"
-                    id="search"
-                    :placeholder="this.searchRegexp ? 'Regexp' : 'Search'"
-                    class="form-control"
-                    v-model="search">
-                  <div class="input-group-append">
-                    <button
-                      :class="['btn', this.searchRegexp ? 'btn-primary' : 'btn-outline-secondary']"
-                      type="button"
-                      data-toggle="tooltip"
-                      data-placement="right"
-                      title="Toggle Regexp Search"
-                      @click="onToggleSearchMode">
-                      <i class="oi oi-code"/>
-                    </button>
-                  </div>
-                </div>
+                <search-input
+                  v-model="search"
+                  :search-regexp="searchRegexp"
+                  @toggleSearchMode="onToggleSearchMode"/>
               </div>
             </div>
           </nav>
@@ -47,7 +32,6 @@
           <nav
             class="col-sm-4 col-md-3 d-none d-sm-block bg-faded sidebar"
             v-if="!fullscreen">
-
             <path-menu
               :schema="schema"
               :request-url="selectedUrl"
@@ -103,11 +87,13 @@ import {sendRequest} from "./actions/sendRequest";
 import {getBasePath, getFirstServerUrl, getRequestBody} from "./helper/schemaHelper";
 import HeaderTable from "./components/HeaderTable.vue";
 import BasicAuth from "./components/BasicAuth.vue";
+import SearchInput from "./components/SearchInput";
 
 const AUTHORIZATION_HEADER = "Authorization";
 
 export default {
 	components: {
+		SearchInput,
 		BasicAuth,
 		HeaderTable,
 		PathMenu,
@@ -227,7 +213,7 @@ export default {
   .logo {
     position: fixed;
     top: 0;
-    height: 100px;
+    height: 120px;
     left: 0;
     z-index: 1000;
     padding: 20px;
@@ -238,7 +224,7 @@ export default {
 
   .sidebar {
     position: fixed;
-    top: 100px;
+    top: 120px;
     bottom: 0;
     left: 0;
     z-index: 1000;
