@@ -26,14 +26,14 @@ export default {
 	],
 	computed: {
 		urls() {
-			if (trim(this.searchRegexp)) {
+			if (this.searchRegexp) {
 				return Object.keys(this.schema.paths).filter(u => {
 					return u.match(this.search);
 				});
 			} else {
 				const search = this.search.toLowerCase();
 				return Object.keys(this.schema.paths).filter(u => {
-					return u.includes(search);
+					return u.includes(trim(search));
 				});
 			}
 		}
