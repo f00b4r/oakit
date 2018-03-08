@@ -13,6 +13,7 @@
               <div class="col">
                 <div class="input-group">
                   <input
+                    tabindex="1"
                     id="search"
                     :placeholder="this.searchRegexp ? 'Regexp' : 'Search'"
                     class="form-control"

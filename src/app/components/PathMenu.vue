@@ -5,6 +5,7 @@
       v-for="(url, index) in urls"
       :key="index">
       <a
+        :tabindex="index + 1"
         href="#"
         @click="onSelectUrl(url)"
         :class="{'nav-link': true, 'active': url === requestUrl}">{{ url }}</a>
