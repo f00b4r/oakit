@@ -7,6 +7,9 @@ export const TEST_SWAGGER = {
 	"servers": [
 		{
 			"url": "http://localhost:10080/Virtual/master-projectus.jrh"
+		},
+		{
+			"url": "http://localhost:10080/Virtual/projectus.jrh"
 		}
 	],
 	"paths": {
