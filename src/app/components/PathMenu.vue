@@ -13,15 +13,28 @@
 </template>
 
 <script>
+import trim from "lodash/trim";
+
 export default {
 	name: "PathMenu",
 	props: [
 		"schema",
+	  "search",
+	  "searchRegexp",
 		"requestUrl"
 	],
 	computed: {
 		urls() {
-			return Object.keys(this.schema.paths);
+		if (trim(this.searchRegexp)) {
+			return Object.keys(this.schema.paths).filter(u => {
+				return u.match(this.search);
+			});
+		} else {
+			const search = this.search.toLowerCase();
+			return Object.keys(this.schema.paths).filter(u => {
+				return u.includes(search);
+			});
+		}
 		}
 	},
 	methods: {

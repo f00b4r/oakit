@@ -9,6 +9,28 @@
           v-if="!fullscreen">
           <nav class="col-sm-4 col-md-3 d-none d-sm-block bg-faded logo">
             {{ schema.info.title }}
+            <div class="row">
+              <div class="col">
+                <div class="input-group">
+                  <input
+                    id="search"
+                    :placeholder="this.searchRegexp ? 'Regexp' : 'Search'"
+                    class="form-control"
+                    v-model="search">
+                  <div class="input-group-append">
+                    <button
+                      :class="['btn', this.searchRegexp ? 'btn-primary' : 'btn-outline-secondary']"
+                      type="button"
+                      data-toggle="tooltip"
+                      data-placement="right"
+                      title="Toggle Regexp Search"
+                      @click="onToggleSearchMode">
+                      <i class="oi oi-code"/>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </nav>
           <div class="col-sm-8 offset-sm-4 col-md-9 offset-md-3 pt-3">
             <request-url
@@ -21,10 +43,15 @@
           </div>
         </div>
         <div class="row">
-          <nav class="col-sm-4 col-md-3 d-none d-sm-block bg-faded sidebar" v-if="!fullscreen">
+          <nav
+            class="col-sm-4 col-md-3 d-none d-sm-block bg-faded sidebar"
+            v-if="!fullscreen">
+
             <path-menu
               :schema="schema"
               :request-url="selectedUrl"
+              :search="search"
+              :search-regexp="searchRegexp"
               @selectUrl="onSelectUrl"/>
           </nav>
           <main class="col-sm-8 offset-sm-4 col-md-9 offset-md-3 pt-3">
@@ -88,7 +115,9 @@ export default {
 			responseHeaders: {},
 			responseBody: "",
 			requestUrl: "",
-			fullscreen: false
+		fullscreen: false,
+		search: "",
+		searchRegexp: false
 		};
 	},
 	props: ["schema"],
@@ -96,6 +125,9 @@ export default {
 		onRequestBodyChange(requestBody) {
 			this.requestBody = requestBody;
 		},
+	  onToggleSearchMode() {
+		  this.searchRegexp = !this.searchRegexp;
+	  },
 		onSelectUrl(url) {
 			this.requestUrl = getFirstServerUrl(this.schema) + getBasePath(this.schema) + url;
 			this.selectedUrl = url;
@@ -139,7 +171,7 @@ export default {
   .logo {
     position: fixed;
     top: 0;
-    height: 70px;
+    height: 100px;
     left: 0;
     z-index: 1000;
     padding: 20px;
@@ -150,7 +182,7 @@ export default {
 
   .sidebar {
     position: fixed;
-    top: 70px;
+    top: 100px;
     bottom: 0;
     left: 0;
     z-index: 1000;
