@@ -114,11 +114,14 @@ export default {
 		CodeMirror,
 		RequestUrl
 	},
+	created() {
+		this.selectedServerUrl = getFirstServerUrl(this.schema);
+	},
 	data() {
 		return {
 			selectedUrl: "",
-			allowedMethods: ["GET", "POST", "PUT", "DELETE"],
-			requestMethod: "GET",
+			allowedMethods: ["None"],
+			requestMethod: "None",
 			requestHeaders: {
 				// "Authorization": "Basic " + btoa("user:pass"),
 				"Accept": "application/json",
@@ -131,7 +134,8 @@ export default {
 			requestUrl: "",
 			fullscreen: false,
 			search: "",
-			searchRegexp: false
+			searchRegexp: false,
+			selectedServerUrl: ""
 		};
 	},
 	props: ["schema"],
@@ -179,12 +183,11 @@ export default {
 			this.searchRegexp = !this.searchRegexp;
 		},
 		onSelectUrl(url) {
-			this.requestUrl = getFirstServerUrl(this.schema) + getBasePath(this.schema) + url;
+			this.requestUrl = this.selectedServerUrl + getBasePath(this.schema) + url;
 			this.selectedUrl = url;
 			this.allowedMethods = Object.keys(this.schema.paths[url]).map(m => m.toUpperCase());
 			this.requestMethod = this.allowedMethods[0];
 			this.requestBody = getRequestBody(this.schema, url);
-
 		},
 		onChangeBasicAuth(data) {
 			if (data.use) {

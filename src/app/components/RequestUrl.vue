@@ -17,6 +17,7 @@
       </div>
       <button
         type="button"
+        :disabled="disabledSend"
         :class="cls"
         @click="onSendRequest">
         {{ requestMethod }}
@@ -51,7 +52,8 @@ function getButtonClass(method) {
 		"GET": "btn-secondary",
 		"POST": "btn-success",
 		"PUT": "btn-primary",
-		"DELETE": "btn-danger"
+		"DELETE": "btn-danger",
+		"None": "btn-dark"
 	}[method];
 }
 
@@ -64,6 +66,9 @@ export default {
 		"requestUrl"
 	],
 	computed: {
+		disabledSend() {
+			return !["GET", "PUT", "POST", "DELETE"].includes(this.requestMethod);
+		},
 		cls() {
 			return getButtonClass(this.requestMethod) + " btn";
 		},
