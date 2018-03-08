@@ -15,7 +15,7 @@ Alternative to swagger UI client written in Vue JS.
 
 | State       | Version      | Branch   |
 |-------------|--------------|----------|
-| master      | `^0.0.2`     | `master` |
+| master      | `^0.0.3`     | `master` |
 
 ## Downloading
 

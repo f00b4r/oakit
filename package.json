@@ -1,6 +1,6 @@
 {
 	"name": "@apitte/openapi-toolkit",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"author": "Jura Papp",
 	"license": "MIT",
 	"dependencies": {
