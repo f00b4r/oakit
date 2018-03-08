@@ -16,12 +16,12 @@ function responseHandler(xhr, callback) {
 		responseHeaders[name] = value;
 	});
 
-	callback(responseHeaders, formatIfJson(xhr.responseText));
+	callback(responseHeaders, formatIfJson(xhr.responseText), xhr.status);
 }
 
 export function sendRequest({url, method, body, headers}, callback) {
 	// http://localhost:10080/Virtual/master-projectus.jrh/apirest/open-api/schema
-	callback({}, `Sending Request to ${method} ${url}...`);
+	callback({}, `Sending Request to ${method} ${url}...`, 0);
 
 	const xhr = new XMLHttpRequest();
 
