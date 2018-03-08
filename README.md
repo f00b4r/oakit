@@ -2,7 +2,12 @@
 
 Alternative to swagger UI client written in Vue JS.
 
-<img src="https://raw.githubusercontent.com/apitte/openapi-toolkit/master/.docs/screenshot.png?raw=true">
+- It has fullscreen mode for request and for response (F11/Esc)
+- Can handle basic auth
+- Can change servers on the go when they are setup in schema
+- Filtering for paths with regexp or simple search
+
+<img src="https://raw.githubusercontent.com/apitte/openapi-toolkit/master/.docs/screenshot2.png?raw=true">
 
 ## Version
 
