@@ -115,9 +115,9 @@ export default {
 			responseHeaders: {},
 			responseBody: "",
 			requestUrl: "",
-		fullscreen: false,
-		search: "",
-		searchRegexp: false
+			fullscreen: false,
+			search: "",
+			searchRegexp: false
 		};
 	},
 	props: ["schema"],
@@ -125,9 +125,9 @@ export default {
 		onRequestBodyChange(requestBody) {
 			this.requestBody = requestBody;
 		},
-	  onToggleSearchMode() {
-		  this.searchRegexp = !this.searchRegexp;
-	  },
+		onToggleSearchMode() {
+			this.searchRegexp = !this.searchRegexp;
+		},
 		onSelectUrl(url) {
 			this.requestUrl = getFirstServerUrl(this.schema) + getBasePath(this.schema) + url;
 			this.selectedUrl = url;
