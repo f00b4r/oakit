@@ -10,6 +10,10 @@ Alternative to swagger UI client written in Vue JS.
 |-------------|--------------|----------|
 | master      | `^0.0.2`     | `master` |
 
+## Downloading
+
+- `npm install @apitte/openapi-toolkit`
+
 ## Development
 
 - `npm install`
