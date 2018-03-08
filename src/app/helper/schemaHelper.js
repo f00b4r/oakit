@@ -25,6 +25,14 @@ export function getFirstServerUrl(schema) {
 	}
 }
 
+export function getServers(schema) {
+	if (schema.servers && schema.servers.length > 0) {
+		return [...schema.servers.map(s => s.url), ""];
+	} else {
+		return "";
+	}
+}
+
 /**
  * Get the reference object in swagger io schema
  *

@@ -1,7 +1,26 @@
 <template>
   <div class="input-group">
-    <div class="input-group-prepend">
-      <div class="input-group-text">URL</div>
+    <div
+      class="input-group-prepend"
+      v-if="servers.length > 1">
+      <button
+        type="button"
+        class="btn-secondary btn  dropdown-toggle dropdown-toggle-split"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false">
+        <span class="sr-only">Select Server</span>
+      </button>
+      <div class="dropdown-menu">
+        <a
+          :class="['dropdown-item', s === selectedServer ? 'bg-dark text-white': '']"
+          href="#"
+          v-for="(s, index) in servers"
+          :key="index"
+          @click="onSelectSelectServer(s)">
+          {{ s !== "" ? s : "No Server" }}
+        </a>
+      </div>
     </div>
     <input
       type="text"
@@ -63,7 +82,9 @@ export default {
 	props: [
 		"allowedMethods",
 		"requestMethod",
-		"requestUrl"
+		"requestUrl",
+		"servers",
+		"selectedServer"
 	],
 	computed: {
 		disabledSend() {
@@ -79,6 +100,9 @@ export default {
 	methods: {
 		onSelectMethod(m) {
 			this.$emit("methodChange", m);
+		},
+		onSelectSelectServer(s) {
+			this.$emit("serverChange", s);
 		},
 		onChangeUrl(e) {
 			this.$emit("changeUrl", e.target.value);

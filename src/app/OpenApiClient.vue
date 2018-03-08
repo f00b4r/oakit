@@ -23,6 +23,9 @@
               @send="onSendRequest"
               @methodChange="onSelectMethod"
               @changeUrl="onUrlChange"
+              @serverChange="onChangeServer"
+              :selected-server="selectedServerUrl"
+              :servers="servers"
               :request-url="requestUrl"
               :request-method="requestMethod"
               :allowed-methods="allowedMethods"/>
@@ -84,7 +87,7 @@ import AllowedMethodInfo from "./components/AllowedMethodInfo.vue";
 import PathMenu from "./components/PathMenu.vue";
 import CodeMirror from "./components/CodeMirror";
 import {sendRequest} from "./actions/sendRequest";
-import {getBasePath, getFirstServerUrl, getRequestBody} from "./helper/schemaHelper";
+import {getBasePath, getFirstServerUrl, getRequestBody, getServers} from "./helper/schemaHelper";
 import HeaderTable from "./components/HeaderTable.vue";
 import BasicAuth from "./components/BasicAuth.vue";
 import SearchInput from "./components/SearchInput";
@@ -118,7 +121,6 @@ export default {
 			responseStatus: 0,
 			responseHeaders: {},
 			responseBody: "",
-			requestUrl: "",
 			fullscreen: false,
 			search: "",
 			searchRegexp: false,
@@ -127,6 +129,12 @@ export default {
 	},
 	props: ["schema"],
 	computed: {
+		servers() {
+			return getServers(this.schema);
+		},
+		requestUrl() {
+			return this.selectedServerUrl + getBasePath(this.schema) + this.selectedUrl;
+		},
 		statusBorderColor() {
 			let cls = "border ";
 			if (this.responseStatus >= 100 && this.responseStatus < 200) {
@@ -170,7 +178,6 @@ export default {
 			this.searchRegexp = !this.searchRegexp;
 		},
 		onSelectUrl(url) {
-			this.requestUrl = this.selectedServerUrl + getBasePath(this.schema) + url;
 			this.selectedUrl = url;
 			this.allowedMethods = Object.keys(this.schema.paths[url]).map(m => m.toUpperCase());
 			this.requestMethod = this.allowedMethods[0];
@@ -200,10 +207,13 @@ export default {
 			});
 		},
 		onUrlChange(url) {
-			this.requestUrl = url;
+			this.selectedUrl = url.replace(this.selectedServerUrl, "");
 		},
 		onSelectMethod(method) {
 			this.requestMethod = method;
+		},
+		onChangeServer(server) {
+			this.selectedServerUrl = server;
 		}
 	}
 };
