@@ -1,4 +1,5 @@
-export const TEST_SWAGGER = {
+window.swaggerSample = window.swaggerSample || {};
+window.swaggerSample.petStore = {
 	"swagger": "2.0",
 	"info": {
 		"version": "1.0.0",

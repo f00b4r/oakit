@@ -1,4 +1,5 @@
-export const TEST_SWAGGER = {
+window.swaggerSample = window.swaggerSample || {};
+window.swaggerSample.apiDoc = {
 	"openapi": "3.0.0",
 	"info": {
 		"title": "Api Docs",
