@@ -3,85 +3,78 @@
     id="main"
     class="container-fluid">
     <div class="row">
-      <div class="col">
-        <div
-          class="row"
-          v-if="!fullscreen">
-          <nav class="col-sm-4 col-md-3 d-none d-sm-block bg-faded logo">
-            {{ schema.info.title }}
-            <div class="row">
-              <div class="col">
-                <search-input
-                  v-model="search"
-                  :search-regexp="searchRegexp"
-                  @toggleSearchMode="onToggleSearchMode"/>
-              </div>
+      <div class="col-sm-4 oat-search pt-3">
+        <nav class="oat-search-header p-3">
+          {{ schema.info.title }}
+          <div class="row">
+            <div class="col">
+              <search-input
+                v-model="search"
+                :search-regexp="searchRegexp"
+                @toggleSearchMode="onToggleSearchMode"/>
             </div>
-          </nav>
-          <div class="col-sm-8 offset-sm-4 col-md-9 offset-md-3 pt-3">
-            <request-url
-              @send="onSendRequest"
-              @methodChange="onSelectMethod"
-              @changeUrl="onUrlChange"
-              @serverChange="onChangeServer"
-              :selected-server="selectedServerUrl"
-              :servers="servers"
-              :request-url="requestUrl"
-              :request-method="requestMethod"
-              :allowed-methods="allowedMethods"/>
           </div>
-        </div>
-        <div class="row">
-          <nav
-            class="col-sm-4 col-md-3 d-none d-sm-block bg-faded sidebar"
-            v-if="!fullscreen">
-            <path-menu
-              :schema="schema"
-              :request-url="selectedUrl"
-              :search="search"
-              :search-regexp="searchRegexp"
-              @selectUrl="onSelectUrl"/>
-          </nav>
-          <main class="col-sm-8 offset-sm-4 col-md-9 offset-md-3 pt-3">
-            <div class="row">
-              <div class="col-md-6">
-                <div>&nbsp;
-                </div>
-                <div class="border border-dark">
-                  <code-mirror
-                    :value="requestBody"
-                    :options="{}"
-                    @fullscreen="onFullScreen"
-                    @onChange="onRequestBodyChange"/>
-                </div>
-                <header-table :headers="requestHeaders"/>
-                <basic-auth @change="onChangeBasicAuth"/>
-                <request-params
-                  :selected-server-url="selectedServerUrl"
-                  :schema="schema"
-                  :request-method="requestMethod"
-                  :selected-url="selectedUrl"
-                />
+        </nav>
+        <nav
+          class="oat-search-body"
+          v-if="!fullscreen">
+          <path-menu
+            :schema="schema"
+            :request-url="selectedUrl"
+            :search="search"
+            :search-regexp="searchRegexp"
+            @selectUrl="onSelectUrl"/>
+        </nav>
+      </div>
+      <div class="col-sm-8 pt-3">
+        <request-url
+          @send="onSendRequest"
+          @methodChange="onSelectMethod"
+          @changeUrl="onUrlChange"
+          @serverChange="onChangeServer"
+          :selected-server="selectedServerUrl"
+          :servers="servers"
+          :request-url="requestUrl"
+          :request-method="requestMethod"
+          :allowed-methods="allowedMethods"/>
+
+        <main>
+          <div class="row pt-3">
+            <div class="col-md-6">
+              <div class="border border-dark">
+                <code-mirror
+                  :value="requestBody"
+                  :options="{}"
+                  @fullscreen="onFullScreen"
+                  @onChange="onRequestBodyChange"/>
               </div>
-              <div class="col-md-6">
-                <div :class="statusBackgroundColor">
-                  <div class="col">Status Code:
-                    {{ responseStatus }}
-                  </div>
+              <header-table :headers="requestHeaders"/>
+              <basic-auth @change="onChangeBasicAuth"/>
+              <request-params
+                :selected-server-url="selectedServerUrl"
+                :schema="schema"
+                :request-method="requestMethod"
+                :selected-url="selectedUrl"
+              />
+            </div>
+            <div class="col-md-6">
+              <div :class="statusBackgroundColor">
+                <div class="col">Status Code:
+                  {{ responseStatus }}
                 </div>
-                <div>
-                  <div :class="statusBorderColor">
-                    <code-mirror
-                      :value="responseBody"
-                      :options="{readOnly: true}"
-                      @fullscreen="onFullScreen"/>
-                  </div>
-                  <header-table :headers="responseHeaders"/>
+              </div>
+              <div>
+                <div :class="statusBorderColor">
+                  <code-mirror
+                    :value="responseBody"
+                    :options="{readOnly: true}"
+                    @fullscreen="onFullScreen"/>
                 </div>
+                <header-table :headers="responseHeaders"/>
               </div>
             </div>
-          </main>
-        </div>
+          </div>
+        </main>
       </div>
     </div>
   </div>
@@ -232,50 +225,47 @@ export default {
 </script>
 
 <style>
-  .logo {
-    position: fixed;
-    top: 0;
-    height: 120px;
-    left: 0;
-    z-index: 1000;
-    padding: 20px;
-    overflow-x: hidden;
-    overflow-y: hidden;
+  .oat-search {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
     background-color: #eee;
+    height: 100vh;
   }
 
-  .sidebar {
-    position: fixed;
-    top: 120px;
-    bottom: 0;
-    left: 0;
-    z-index: 1000;
-    padding: 20px;
-    overflow-x: hidden;
+  .oat-search-header {
+    position: absolute;
+    height: 100px;
+    width: 100%;
+  }
+
+  .oat-search-body {
+    padding-left: 0 !important;
+    padding-right: 0 !important;;
+    background-color: #fff;
+    margin-top: 100px;
+    height: calc(100% - 100px);
     overflow-y: auto;
+    overflow-x: hidden;
     border-right: 1px solid #eee;
+    width: 100%;
   }
 
-  .sidebar {
-    padding-left: 0;
-    padding-right: 0;
+  @media screen and (max-width: 600px) {
+    .oat-search {
+      height: 300px;
+    }
   }
 
-  .sidebar .nav {
-    margin-bottom: 20px;
-  }
-
-  .sidebar .nav-item {
+  .oat-search-body .nav-item {
     width: 100%;
     border-bottom: 1px solid #ddd;
   }
 
-  .sidebar .nav-item + .nav-item {
+  .oat-search-body .nav-item + .nav-item {
     margin-left: 0;
   }
 
-  .sidebar .nav-link {
+  .oat-search-body .nav-link {
     border-radius: 0;
   }
-
 </style>
