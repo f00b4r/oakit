@@ -10,7 +10,7 @@
 		"vue-codemirror": "^4.0.3"
 	},
 	"devDependencies": {
-		"babel-core": "^6.26.0",
+		"babel-core": "^6.26.3",
 		"babel-loader": "^7.1.4",
 		"babel-plugin-transform-async-to-generator": "^6.24.1",
 		"babel-plugin-transform-object-rest-spread": "^6.26.0",
