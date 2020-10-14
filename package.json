@@ -15,7 +15,7 @@
 		"babel-plugin-transform-async-to-generator": "^6.24.1",
 		"babel-plugin-transform-object-rest-spread": "^6.26.0",
 		"babel-preset-env": "^1.7.0",
-		"css-loader": "^4.3.0",
+		"css-loader": "^5.0.0",
 		"eslint": "^7.11.0",
 		"eslint-plugin-vue": "^7.0.1",
 		"style-loader": "^2.0.0",
